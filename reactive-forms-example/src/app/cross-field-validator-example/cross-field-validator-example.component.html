@@ -1,0 +1,21 @@
+<h1>Crossfield validator example</h1>
+<form [formGroup]="form">
+    <div>
+        <label for="username">Username: </label>
+        <input id="username" formControlName="username">
+    </div>
+    <div>
+        <label for="password" >Password: </label>
+        <input type="password"  id="password" formControlName="password">
+    </div>
+    <div>
+        <label for="passwordrepeat" >Repeat password: </label>
+        <input type="password" id="passwordrepeat" formControlName="passwordRepeat">
+    </div>
+
+    <div class="error" *ngIf="!form.valid">
+        <span *ngIf="form.errors?.['passwordmismatch']">Passwords dont match</span>
+    </div>
+</form>
+<br/>
+{{ form.value | json }}

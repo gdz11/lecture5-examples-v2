@@ -1,0 +1,67 @@
+<h1>Complex example</h1>
+<div class="form-container">
+    <form [formGroup]="form" (ngSubmit)="register()">
+        <div class="form-row">
+            <label for="name">Name: </label>
+            <div class="input-container">
+                <input formControlName="name" id="name" />
+                <div *ngIf="name?.invalid && (name?.touched || name?.dirty)" class="error">
+                    <div *ngIf="name?.errors?.['required']">This field is required</div>
+                    <span *ngIf="name?.errors?.['minlength']">Minimum 3 characters required</span>
+                    <span *ngIf="name?.errors?.['pattern']">Only letters allowed</span>
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <label for="lastname">Last name: </label>
+            <div class="input-container">
+                <input formControlName="lastname" id="lastname">
+                <div *ngIf="lastname?.invalid && (lastname?.touched || lastname?.dirty)" class="error">
+                    <span *ngIf="lastname?.errors?.['required']">This field is required</span>
+                    <span *ngIf="lastname?.errors?.['minlength']">Minimum 3 characters required</span>
+                    <span *ngIf="lastname?.errors?.['pattern']">Only letters allowed</span>
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <label for="gender">Gender: </label>
+            <div class="input-container">
+                <select formControlName="gender" id="gender">
+                    <option *ngFor="let item of genders" [ngValue]="item.id">{{item.name}}</option>
+                </select>
+                <div *ngIf="gender?.invalid && (gender?.touched || gender?.dirty)" class="error">
+                    <span *ngIf="gender?.errors?.['required']">This field is required</span>
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <label for="phone">Phone: </label>
+            <div class="input-container">
+                <input formControlName="phone" id="phone">
+                <div *ngIf="phone?.invalid && (phone?.touched || phone?.dirty)" class="error">
+                    <span *ngIf="phone?.errors?.['pattern']">Should be in format 2xxxxxx</span>
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <label for="email">Email: </label>
+            <div class="input-container">
+                <input formControlName="email" id="email">
+                <div *ngIf="email?.invalid && (email?.touched || email?.dirty)" class="error">
+                    <span *ngIf="email?.errors?.['required']">This field is required</span>
+                    <span *ngIf="email?.errors?.['email']">Invalid format</span>
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <label for="isLegalAge">Legal age: </label>
+            <div class="input-container">
+                <input type="checkbox" formControlName="isLegalAge" id="isLegalAge">
+                <div *ngIf="isLegalAge?.invalid && (isLegalAge?.touched || isLegalAge?.dirty)" class="error">
+                    <span *ngIf="isLegalAge?.errors?.['required']">You need to be at least 18 years old</span>
+                </div>
+            </div>
+        </div>
+        <button type="submit" [disabled]="!form.valid">Register</button>
+    </form>
+</div>
