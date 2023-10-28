@@ -10,7 +10,7 @@
     <div class="form__row">
         <label for="lastname">Last name: </label>
         <input formControlName="lastname" id="lastname">
-        <div *ngIf="lastname?.invalid && (lastname?.touched || lastname?.dirty)">
+        <div *ngIf="lastname?.invalid && (lastname?.touched && lastname?.dirty)">
             <span *ngIf="lastname?.errors?.['required']" class="error">This field is required</span>
             <span *ngIf="lastname?.errors?.['minlength']" class="error">Minimum 2 characters required</span>
         </div>
