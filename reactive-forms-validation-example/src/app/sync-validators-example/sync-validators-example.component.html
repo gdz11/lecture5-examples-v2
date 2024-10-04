@@ -1,0 +1,34 @@
+<h1>Sync validators example</h1>
+<form [formGroup]="form">
+    <div class="form__row">
+        <label for="name">Name: </label>
+        <input formControlName="name"  id="name" />
+        @if(name?.invalid && (name?.touched || name?.dirty)){
+            <div>
+                @if(name?.errors?.['required']){
+                    <div class="error">This field is required</div>
+                }
+            </div>
+        }
+    </div>
+    <div class="form__row">
+        <label for="lastname">Last name: </label>
+        <input formControlName="lastname" id="lastname">
+        @if(lastname?.invalid && (lastname?.touched && lastname?.dirty)){
+            <div>
+                @if(lastname?.errors?.['required']){
+                    <span class="error">This field is required</span>
+                }
+                @if(lastname?.errors?.['minlength']){
+                    <span class="error">Minimum 2 characters required</span>
+                }
+            </div>
+        }
+    </div>
+</form>
+
+<div>
+    <h2>debug:</h2>
+    <div>name field errors: {{ name?.errors | json}}</div>
+    <div>lastname field errors: {{ lastname?.errors | json}}</div>
+</div>

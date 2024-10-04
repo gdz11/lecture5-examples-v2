@@ -1,0 +1,105 @@
+<h1>Complex example</h1>
+<div class="form-container">
+    <form [formGroup]="form" (ngSubmit)="register()">
+        <div class="form-row">
+            <label for="name">Name: </label>
+            <div class="input-container">
+                <input formControlName="name" id="name" />
+                @if(name?.invalid && (name?.touched || name?.dirty))
+                {
+                    <div class="error">
+                        @if(name?.errors?.['required']){
+                            <div>This field is required</div>
+                        }
+                        @if(name?.errors?.['minlength']){
+                            <span>Minimum 3 characters required</span>
+                        }
+                        @if(name?.errors?.['pattern']){
+                            <span>Only letters allowed</span>
+                        }
+                    </div>
+                }   
+            </div>
+        </div>
+        <div class="form-row">
+            <label for="lastname">Last name: </label>
+            <div class="input-container">
+                <input formControlName="lastname" id="lastname">
+                @if(lastname?.invalid && (lastname?.touched || lastname?.dirty)){
+                    <div class="error">
+                        @if(lastname?.errors?.['required']){
+                            <span>This field is required</span>
+                        }
+                        @if(lastname?.errors?.['minlength']){
+                            <span>Minimum 3 characters required</span>
+                        }
+                        @if(lastname?.errors?.['pattern']){
+                            <span>Only letters allowed</span>
+                        }
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="form-row">
+            <label for="gender">Gender: </label>
+            <div class="input-container">
+                <select formControlName="gender" id="gender">
+                    @for(item of genders; track item.id){
+                        <option [ngValue]="item.id">{{item.name}}</option>
+                    }
+                </select>
+                @if(gender?.invalid && (gender?.touched || gender?.dirty)){
+                    <div class="error">
+                        @if(gender?.errors?.['required']){
+                            <span>This field is required</span>
+                        }
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="form-row">
+            <label for="phone">Phone: </label>
+            <div class="input-container">
+                <input formControlName="phone" id="phone">
+                @if(phone?.invalid && (phone?.touched || phone?.dirty)){
+                    <div class="error">
+                        @if(phone?.errors?.['pattern']){
+                            <span>Should be in format 2xxxxxx</span>
+                        }
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="form-row">
+            <label for="email">Email: </label>
+            <div class="input-container">
+                <input formControlName="email" id="email">
+                @if(email?.invalid && (email?.touched || email?.dirty))
+                {
+                    <div class="error">
+                        @if(email?.errors?.['required']){
+                            <span>This field is required</span>
+                        }
+                        @if(email?.errors?.['email']){
+                            <span>Invalid format</span>
+                        }
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="form-row">
+            <label for="isLegalAge">Legal age: </label>
+            <div class="input-container">
+                <input type="checkbox" formControlName="isLegalAge" id="isLegalAge">
+                @if(isLegalAge?.invalid && (isLegalAge?.touched || isLegalAge?.dirty)){
+                    <div class="error">
+                        @if(isLegalAge?.errors?.['required']){
+                            <span>You need to be at least 18 years old</span>
+                        }
+                    </div>
+                }
+            </div>
+        </div>
+        <button type="submit" [disabled]="!form.valid">Register</button>
+    </form>
+</div>
